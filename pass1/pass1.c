@@ -52,7 +52,12 @@ void passOne(char label[10], char opcode[10], char operand[10], char code[10], c
 		else if (strcmp(opcode, "RESW") == 0)
 			locctr += (3 * (atoi(operand)));
 		else if (strcmp(opcode, "BYTE") == 0)
-			++locctr;
+			{
+				if((operand[0]=='C') || (operand[0]=='c'))
+					locctr+=strlen(operand)-3;
+				else
+					locctr+=(strlen(operand)-3)/2;
+			}
 		else if (strcmp(opcode, "RESB") == 0)
 			locctr += (atoi(operand));
 		fscanf(fp1, "%s\t%s\t%s", label, opcode, operand);
